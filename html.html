@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FA3 - Randomizer</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=IM+Fell+Great+Primer+SC&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Fish Canning Factory Internship</h1>
+        <p>Welcome to the factory. These are your job details.</p>
+        <p>Here is the number of people working in each department. Avoid going to the most populated one.</p>
+
+        <div class="depts">
+            <div class="box">
+                <h2>Fishing</h2><hr></hr>
+                <p id="num1"></p>
+            </div>
+            <div class="box">
+                <h2>Canning</h2><hr></hr>
+                <p id="num2"></p>
+            </div>
+            <div class="box">
+                <h2>Checking</h2><hr></hr>
+                <p id="num3"></p>
+            </div>
+        </div>
+
+        <p id="max"></p>
+        <p id="EotM"></p>
+        <p id="shift"></p>
+        <h2>You start tomorrow. Good luck.</h2>
+    </div>
+
+    <script>
+        function roundRandom() {
+            return Math.floor(Math.random() * 20) + 1; // Ensures a number between 1 and 20
+        }
+
+        var num1 = roundRandom();
+        var num2 = roundRandom();
+        var num3 = roundRandom();
+
+        var numbers = [num1, num2, num3];
+
+        var max = Math.max(...numbers);
+    
+        let labels = ['Fishing', 'Canning', 'Checking'];
+        let assignedLabels = [];
+
+        
+        numbers.forEach((num, index) => {
+            if (num === max) {
+                assignedLabels.push(`${labels[index]} (${max})`); // Department first, then number
+            }
+        });
+
+        var string = "AABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var letter = string[num1];
+        var time = parseInt(num2) * parseInt(num3);
+        var hour = parseInt(time / 60);
+        var mins = parseInt(time % 60);
+
+
+        document.getElementById("num1").innerHTML = num1;
+        document.getElementById("num2").innerHTML = num2;
+        document.getElementById("num3").innerHTML = num3;
+
+        document.getElementById("max").innerHTML = "The department/s with the most workers is: " + assignedLabels.join(', ');
+        document.getElementById("EotM").innerHTML = "The employee of the month has a name that starts with the letter: " + letter;
+        document.getElementById("shift").innerHTML = "Your total shift time is " + time + " minutes " + "( " + hour + " hour/s & " + mins + " minute/s)"
+    </script>
+</body>
+</html>
